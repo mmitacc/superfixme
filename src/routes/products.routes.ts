@@ -21,23 +21,7 @@ productsRouter.get("/", obtenerProductos);
 
 productsRouter.get("/:id", validateParamsId(), obtenerProductoPorId);
 
-productsRouter.post(
-  "/",
-  validateBody(createProductSchema),
-  // #swagger.tags = ['Products']
-  // #swagger.summary = 'Crea un producto'
-  // #swagger.parameters['body'] = {
-  //   in: 'body',
-  //   schema: {
-  //     name: 'Teclado mecanico',
-  //     description: 'Switches azules',
-  //     price: 49.99,
-  //     stock: 20,
-  //     categoryId: 1
-  //   }
-  // }
-  crearProducto,
-);
+productsRouter.post("/", validateBody(createProductSchema), crearProducto);
 
 productsRouter.put(
   "/:id",

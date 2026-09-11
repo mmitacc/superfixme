@@ -8,10 +8,17 @@ export class NotFoundError extends Error {
 }
 
 export function notFoundHandler(req: Request, res: Response) {
-  res.status(404).json({ error: `Ruta no encontrada: ${req.method} ${req.originalUrl}` });
+  res
+    .status(404)
+    .json({ error: `Ruta no encontrada: ${req.method} ${req.originalUrl}` });
 }
 
-export function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
+export function errorHandler(
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   if (err.name === "NotFoundError") {
     return res.status(404).json({ error: err.message });
   }
@@ -28,7 +35,7 @@ export function errorHandler(err: any, req: Request, res: Response, next: NextFu
       });
     }
     if (err.code === "P2025") {
-      return res.status(400).json({ error: "Recurso no encontrado" });
+      return res.status(404).json({ error: "Recurso no encontrado" });
     }
   }
 

@@ -1,7 +1,7 @@
 import type { NextFunction, Request, RequestHandler, Response } from "express";
 import type { ZodTypeAny } from "zod";
 
-export function validateBody(schema: ZodTypeAny): RequestHandler {
+export const validateBody = (schema: ZodTypeAny): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
     const result = schema.safeParse(req.body);
     if (!result.success) {
@@ -13,17 +13,20 @@ export function validateBody(schema: ZodTypeAny): RequestHandler {
         })),
       });
     }
+    req.body = result.data;
     next();
   };
-}
+};
 
-export function validateParamsId(paramName = "id"): RequestHandler {
+export const validateParamsId = (paramName = "id"): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction) => {
     const value = Number(req.params[paramName]);
     if (!Number.isInteger(value) || value < 0) {
-      return res.status(400).json({ error: `${paramName} debe ser un entero positivo` });
+      return res
+        .status(400)
+        .json({ error: `${paramName} debe ser un entero positivo` });
     }
     (req.params as Record<string, unknown>)[paramName] = value;
     next();
   };
-}
+};

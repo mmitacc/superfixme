@@ -3,7 +3,8 @@ import swaggerAutogen from "swagger-autogen";
 const doc = {
   info: {
     title: "Tienda API",
-    description: "API REST de ejemplo: Users, Categories, Products, Orders y OrderItems",
+    description:
+      "API REST de ejemplo: Users, Categories, Products, Orders y OrderItems",
     version: "1.0.0",
   },
   servers: [{ url: "http://localhost:3000", description: "Servidor local" }],
@@ -16,8 +17,7 @@ const doc = {
 };
 
 const outputFile = "./swagger-output.json";
-const endpointsFiles = [
-  "./src/app.ts"
-];
+
+const endpointsFiles = ["./src/app.ts"];
 
 swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFiles, doc);

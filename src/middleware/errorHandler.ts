@@ -27,6 +27,8 @@ export function errorHandler(err: any, req: Request, res: Response, next: NextFu
         target: err.meta?.target,
       });
     }
+    // Bug: P2025 indica que el recurso que se intenta modificar o eliminar no existe.
+   // Actualmente devuelve 400, pero corresponde devolver 404 Not Found.
     if (err.code === "P2025") {
       return res.status(400).json({ error: "Recurso no encontrado" });
     }

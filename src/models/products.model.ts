@@ -1,5 +1,5 @@
 import { prisma } from "../lib/prisma.ts";
-
+// Bug: se utiliza any en filtros, por lo no se puede comprobar si los datos enviados corresponden al tipo esperado.
 export const obtenerTodosLosProductos = async (filtros: any) => {
   return prisma.product.findMany({
     where: filtros,
@@ -22,7 +22,7 @@ export const obtenerProductoPorIdModelo = async (id: number) => {
     },
   });
 };
-
+// Bug: se utiliza any en datos, por lo que se pierde el tipado de TypeScript al crear o actualizar un producto.
 export const crearProductoModelo = async (datos: any) => {
   return prisma.product.create({
     data: datos,

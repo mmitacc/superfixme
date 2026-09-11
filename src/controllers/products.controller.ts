@@ -59,8 +59,9 @@ export const obtenerProductos = async (req: Request, res: Response) => {
   const { categoryId, minPrice, maxPrice, inStock } = req.query;
 
   const where: any = {};
-
-  if (categoryId) {
+  // Bug: Number(categoryId) puede devolver NaN o aceptar números decimales.
+ 
+ if (categoryId) {
     where.categoryId = Number(categoryId);
   }
 
@@ -77,8 +78,11 @@ export const obtenerProductos = async (req: Request, res: Response) => {
       lte: Number(maxPrice),
     };
   }
+  //// Bug: cualquier valor diferente de "true" se interpreta como false.
+// Por ejemplo, ?inStock=abc termina buscando productos con stock 0.
+// Solo se permiten los valores "true" y "false".
 
-  if (inStock !== undefined) {
+if (inStock !== undefined) {
     where.stock = inStock === "true" ? { gt: 0 } : { equals: 0 };
   }
 

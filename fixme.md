@@ -1,2 +1,31 @@
 Se encontraron los siguientes errores:
-- En validate.ts, se encontro error en 
+- Se agrego el archivo .env nuevo, ya que no se encontro en el py el modelo .env.example
+- En schema.prisma, se cambio   provider = "postgresql"
+- En src/lib/prisma.ts, todo para postgresql
+- Se instalo: npm install -D typescript @types/node tsx
+- En user.schema.ts, se debe quitar .optional() porque name, es un campo obligatorio.
+- En user.schema.ts, en updateUserSchema, falto agregar .partial(), para que los campos sean opcionales para un update
+- Falto agregar el archivo user.model.ts.
+- En user.model.ts, falto agregar el metodo: findAll()
+- En user.model.ts, falto agregar el metodo: findById()
+- En user.model.ts, falto agregar el metodo: create()
+- En user.model.ts, falto agregar el metodo: update()
+- En user.model.ts, falto agregar el metodo: delete()
+- Falto agregar el archivo user.controller.ts.
+- En user.controller.ts, falto crear la función: getAll()
+- En user.controller.ts, falto crear la función: getById()
+- En user.controller.ts, falto crear la función: postUser()
+- En user.controller.ts, falto crear la función: putUser()
+- En user.controller.ts, falto crear la función: deleteUser()
+- En user.routes.ts, cada uno de los endpoints, tienen multifuncionalidad y multiresponsabilidad, en contra del modelo/patron MVC/SVC, por lo que se restituya a su única función de Vista.
+- En en el endpoint get("/"), restituido.
+- En en el endpoint get("/:id"), restituido.
+- En en el endpoint post("/"), restituido.
+- En en el endpoint put("/:id"), restituido.
+- En en el endpoint delete("/:id"), restituido.
+- En swagger.ts, cambiar en endpointsFiles, todas las rutas por  "./src/app.ts"
+- En user.routes.ts, en el endpoint post("/"), falto agregar en swageer.requestBody para openapi: "3.0.0"
+- En user.routes.ts, en el endpoint put("/"), falto agregar en swageer.requestBody para openapi: "3.0.0"
+- En user.routes.ts, en todos los endpoint se definio mal documentacion para swager, todos deben ser envueltos en /* ... */ (para que sean reconocidos)
+- En user.schema.ts, en el campo email, se actualiza por: email: z.email("El email debe tener un formato correcto y es obligatorio")
+

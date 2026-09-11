@@ -27,16 +27,14 @@ export function errorHandler(
     return res.status(409).json({ error: err.message });
   }
 
-  if (err.name === "PrismaClientKnownRequestError") {
-    if (err.code === "P2002") {
-      return res.status(500).json({
-        error: "Ya existe un registro con ese valor unico",
-        target: err.meta?.target,
-      });
-    }
-    if (err.code === "P2025") {
-      return res.status(404).json({ error: "Recurso no encontrado" });
-    }
+  if (err.code === "P2002") {
+    return res.status(500).json({
+      error: "Ya existe un registro con ese valor unico",
+      target: err.meta?.target,
+    });
+  }
+  if (err.code === "P2025") {
+    return res.status(400).json({ error: "Recurso no encontrado" });
   }
 
   console.error(err);

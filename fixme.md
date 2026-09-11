@@ -8,7 +8,15 @@ falla en delegación de responsabilidades al tener gran parte de los endpoints e
 en la validación de la categoría el createCategorySchema esta como opcional pero el update es un campo que es el name entonces si se actuliza y es opcional no tendría mucho sentido ya que no hay otro campo para modificar
 en validateParamsId esta aceptando si mandamos un id 0 cuando los ids comienzan en 1 
 en validateBody enviava al zod pero en uso de trim no aceptaba la transformaicon de zod y si creabamos "  mecanica   " se pasaba a la base tal cual sin aplicar el trim para eso se agrego req.body = result.data para que lo transformado por zod pase a la base de datos
-Se encontraron los siguientes errores:
+- En validate.ts, se encontro error en
+  productos
+- el filtro de precio maximo no funciona aunque puse maxPrice=100 me siguen apareciendo productos que cuestan mas de 100
+- el filtro minPrice no está funcionando Probe poniendo minPrice=100 pero igual me mostro productos que cuestan menos de 100
+- el instock no funciona probe el filtro y me aparecen todos los productos sin importar si tienen stock
+- el filtro categoryid no funciona porque el codigo usa category en vez de categoryid
+  product schema
+- el name del producto estaba como opcional en la validacion y se podia crear un producto sin nombre
+- swagger no muestra el body del put de products
 - Se agrego el archivo .env nuevo, ya que no se encontro en el py el modelo .env.example
 - En schema.prisma, se cambio   provider = "postgresql"
 - En src/lib/prisma.ts, todo para postgresql
